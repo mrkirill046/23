@@ -35,6 +35,3 @@ jobs:
         with:
           name: app-exe
           path: dist/main.exe
-
-      - name: Clean up
-        run: pyinstaller --clean
