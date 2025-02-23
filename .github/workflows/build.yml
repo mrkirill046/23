@@ -35,3 +35,10 @@ jobs:
         with:
           name: app-exe
           path: dist/main.exe
+
+      - name: Create GitHub release and upload EXE
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/main.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
