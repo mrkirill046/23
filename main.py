@@ -23,31 +23,42 @@ class FireworkParticle:
         self.y += self.vy
         self.vy += 0.3
         self.alpha -= 8
+
         return self.alpha > 0
+
+
+def get_resource_path(filename):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, filename)
+    else:
+        return os.path.join(os.getcwd(), filename)
 
 
 class JumpScare(QWidget):
     def __init__(self):
         super().__init__()
+
         self.setWindowTitle("BOOOO!!!")
         self.showFullScreen()
 
         self.image_label = QLabel(self)
         self.image_label.setGeometry(0, 0, self.width(), self.height())
 
-        image_path = os.path.join(os.getcwd(), "image.png")
+        image_path = get_resource_path("image.png")
 
         if os.path.exists(image_path):
             pixmap = QPixmap(image_path)
+
             if pixmap.isNull():
                 print("Ошибка загрузки изображения!")
             else:
                 print(f"Изображение загружено успешно: {image_path}")
+
                 self.pixmap = pixmap
         else:
             print(f"Файл {image_path} не найден!")
 
-        sound_path = os.path.join(os.getcwd(), "sound.mp3")
+        sound_path = get_resource_path("sound.mp3")
 
         if os.path.exists(sound_path):
             pygame.mixer.init()
